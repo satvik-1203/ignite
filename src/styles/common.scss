@@ -1,0 +1,40 @@
+:root {
+  --primaryColor: #ee829b;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+body {
+  padding: 0rem 5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--primaryColor);
+  margin: 2rem 0;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: rgb(95, 95, 95);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+}

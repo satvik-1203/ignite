@@ -1,33 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { FetchGames, searchGame } from "../actions/gameAction";
+import React, { useState, useEffect } from "react";
+import SearchAbsent from "../components/SearchAbsent";
+import { useSelector, useDispatch } from "react-redux";
+import onChange from "../actions/search";
+import SearchGames from "../components/SearchGames";
 
 const Home = () => {
+  const [search, setSearch] = useState("");
+
+  const Search = useSelector((state) => state.Search);
   const dispatcher = useDispatch();
+
   useEffect(() => {
-    dispatcher(FetchGames());
-  }, []);
-  const dispatch = useDispatch();
-  const [searchState, setSearchState] = useState();
+    if (search === "") {
+      dispatcher(onChange(""));
+    }
+  }, [search]);
 
   return (
-    <div>
-      <h1>
-        <input
-          onChange={(e) => {
-            setSearchState(e.target.value);
-          }}
-          type="text"
-        />
-        <button
-          onClick={() => {
-            dispatch(searchGame(searchState));
-          }}
-        >
-          search
-        </button>
-      </h1>
-    </div>
+    <>
+      <nav>
+        <div className="searchBox">
+          <div className="search">
+            <input
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              type="text"
+              className="searchInput"
+            />
+            <button
+              onClick={() => {
+                dispatcher(onChange(search));
+              }}
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </nav>
+      {!Search ? <SearchAbsent /> : <SearchGames />}
+    </>
   );
 };
 
